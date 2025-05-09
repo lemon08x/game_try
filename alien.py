@@ -1,6 +1,17 @@
 import pygame
 from pygame.sprite import Sprite
 
+import os
+import sys
+
+def resource_path(relative_path):
+    """获取资源文件的绝对路径"""
+    try:
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
 class Alien (Sprite):
     """表示单个外星人的类"""
 
@@ -11,7 +22,7 @@ class Alien (Sprite):
         self.settings = ai_game.settings
 
         # 加载外星人图像并设置其rect属性
-        self.image = pygame.image.load('images/alien.jpg')
+        self.image = pygame.image.load(resource_path('images/alien.jpg'))
         self.rect = self.image.get_rect()
 
         # 每个外星人最初都在(0,0)处

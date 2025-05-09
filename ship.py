@@ -1,6 +1,17 @@
 import pygame
 from pygame.sprite import Sprite
 
+import os
+import sys
+
+def resource_path(relative_path):
+    """获取资源文件的绝对路径"""
+    try:
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
 class Ship(Sprite):
     """管理飞船的类"""
 
@@ -12,7 +23,7 @@ class Ship(Sprite):
         self.screen_rect = ai_game.screen.get_rect()
 
         # 加载飞船图像并获取其外接矩形
-        self.image = pygame.image.load('images/test.jpg')
+        self.image = pygame.image.load(resource_path('images/test.jpg'))
         self.rect = self.image.get_rect()
 
         # 对于每艘新飞船，都将其放在屏幕底部中央
